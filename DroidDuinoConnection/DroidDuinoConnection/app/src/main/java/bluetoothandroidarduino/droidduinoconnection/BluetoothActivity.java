@@ -93,8 +93,8 @@ public class BluetoothActivity extends Activity{
                         }
                     });
 
-                    SeekBar ve = (SeekBar)findViewById(R.id.leftrightseekbar);
-                    sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                    SeekBar ve = (SeekBar)findViewById(R.id.velocitySeekBar);
+                    ve.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                             Log.v(TAG, "Velocity seekbar  pressed.");
@@ -165,7 +165,11 @@ public class BluetoothActivity extends Activity{
         Log.v(TAG, "ForwardORBackward switch pressed.");
 
         Switch sw = (Switch)findViewById(R.id.forwardbackwardswitch);
-        String data = "fb = "+sw.isChecked();
+
+        int swValue = (sw.isChecked()) ? 1 : 0;
+        int forwardBackwardValue = 1 + swValue;  //FORWARD = 1 , BACKWARD = 2 at adafruit documentation
+
+        String data = "fb = "+forwardBackwardValue;
 
         Message msg = Message.obtain();
         msg.obj = data;
